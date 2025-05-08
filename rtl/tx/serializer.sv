@@ -4,7 +4,7 @@
 *
 */
 
-module serializer(
+module serializer (
 
     input   logic               clk,
     input   logic               rst_n,
