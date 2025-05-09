@@ -1,4 +1,4 @@
-module scrambler (
+module descrambler (
 
     input   logic   clk, rst_n, start,
     input   logic   in,

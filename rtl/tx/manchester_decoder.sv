@@ -1,4 +1,4 @@
-module manchester_encoder (
+module manchester_decoder (
 
     input logic data_in,
     input logic clk,
