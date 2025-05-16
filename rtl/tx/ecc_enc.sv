@@ -93,7 +93,7 @@
 
 
 module ecc_enc #(
-  parameter K       = 8, //Information bit vector size
+  parameter K       = 4, //Information bit vector size
   parameter P0_LSB  = 1, //0: p0 is located at MSB
                          //1: p0 is located at LSB
 

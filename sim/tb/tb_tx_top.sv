@@ -1,15 +1,15 @@
 module tb_tx_top();
 
-logic clk, rst_n, start;
+logic clk, rst_n, Cin;
 
-logic [25 : 0] Din;
-logic Dout;
+logic [31 : 0] Din;
+logic [31 : 0] Dout;
 
 tx_top tx_top_dut (
     
     .clk(clk),
     .rst_n(rst_n),
-    .start(start),
+    .Cin(Cin),
     .Din(Din),
     .Dout(Dout)
 
@@ -22,14 +22,17 @@ end
 
 initial begin
     clk = 'b0;
-    start = 'b0;
-    Din = 26'b0011_1100_0100_0100_0101_1111_10;
-    #10 start = 'b1;
-    #20 start = 'b0;
+    rst_n = 'b1;
+    Cin = 'b0;
+    #10 rst_n = 'b0;
+    #20 rst_n = 'b1;
+    Din = 32'hAEF1EF36; 
+    #10 Cin = 'b1;
+    #20 Cin = 'b0;
 end
 
 always #10 clk = ~clk;
 
-initial #2000 $finish();
+initial #3000 $finish();
 
 endmodule

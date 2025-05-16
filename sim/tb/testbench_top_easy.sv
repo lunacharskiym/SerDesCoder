@@ -1,5 +1,6 @@
 module testbench_top_easy;
-  parameter K           = 26;  //Limitation $urandom is a 32bit number
+
+  parameter K           = 4;  
   parameter P0_LSB      = 0;
   parameter DEC_LATENCY = 0;
   parameter RUNS        = 1;
@@ -51,9 +52,6 @@ module testbench_top_easy;
   always #10 clk = ~clk;
 
 
-  //testvector generator
-
-
   //instantiate encoder
   ecc_enc #(
     .K      ( K      ),
@@ -98,9 +96,8 @@ end
   initial
   begin
       clk   = 0;
-      enc_d = 26'b10001010111100000110011110;
+      enc_d = 4'b1010;
     
-
       rst_n = 0;
       repeat (5) @(posedge clk);
       rst_n = 1;

@@ -1,102 +1,106 @@
 module tx_top(
 
-    input   logic   clk, rst_n, start,
-    input   logic   [25 : 0] Din,
+    input   logic   clk, rst_n, Cin,
+    input   logic   [31 : 0] Din,
 
-    output  logic   Dout
-
-);
-
-// hamming
-
-logic [31 : 0] enc_data; // Hamming encoded data
-logic s_hamming; // Hamming serial output
-logic out_scr;
-logic [31 : 0] scr_data;
-logic scr_done;
-logic [31 : 0] Dout_serdes;
-logic Done_serdes;
-logic out_serdes;
-
-ecc_enc #(
-  .K(26),
-  .P0_LSB(1)
-)
- ecc_inst (
-    .d_i  ( Din ),      //information bit vector input
-    .q_o  ( enc_data ),      //encoded data word output
-
-    .p_o  (       ),      //parity vector output
-    .p0_o (       ));     //extended parity bit
-
-
-
-pts_reg pts_reg_inst_1 (
-
-    .clk(clk),
-    .rst_n(),
-    .data(enc_data),
-    .start(start),
-    .out(s_hamming)
+    output  logic   [31 : 0] Dout
 
 );
 
-// scrambler
-scrambler scr_inst (
-    
-    .clk(clk),
-    .in(s_hamming),
-    .out(out_scr)
+// serializer
+logic   [7 : 0] Dout_ser;
+logic           Done_ser;
 
-);
-
-stp_reg stp_reg_inst (
-
-    .clk(clk),
-    .rst_n(),
-    .start(),
-    .data(scr_data),
-    .in(out_scr),
-    .done(scr_done)
-
-);
-
-
-// serdes
-
-serdes serdes_dut (
+serializer ser_inst (
     
     .clk(clk),
     .rst_n(rst_n),
-    .Cin(scr_done),
-    .Din(scr_data),
+    .Cin(Cin),
+    .Din(Din),
 
-    .Dout(Dout_serdes),
-    .Done(Done_serdes)
+    .Dout(Dout_ser),
+    .Done(Done_ser)
+ 
+);
+
+// scrambler
+logic [7 : 0] done_scr;
+logic [7 : 0] done_dscr;
+logic [7 : 0] out_scr;
+logic [7 : 0] data_out_me;
+logic [7 : 0] data_out_md;
+logic [7 : 0] out_dscr;
+
+genvar i;
+generate
+    for (i = 0; i < 8; i++) begin: stage 
+    scrambler scr_inst (
+    
+        .clk(clk),
+        .in(Dout_ser[i]),
+        .rst_n(rst_n),
+        .start(Cin),
+        .done(done_scr[i]),
+        .out(out_scr[i])
+
+    );
+    // manchester
+
+    manchester_encoder me_inst (
+
+        .clk(clk),
+        .data_in(out_scr[i]),
+        .data_out(data_out_me[i])
+
+    );
+   
+    manchester_decoder md_inst (
+
+        .clk(clk),
+        .data_in(data_out_me[i]),
+        .data_out(data_out_md[i])
+
+    );
+
+    descrambler dscr_inst (
+    
+        .clk(clk),
+        .in(data_out_md[i]),
+        .rst_n(rst_n),
+        .start(Cin),
+        .out(out_dscr[i]),
+        .done(done_dscr[i])
+
+    );
+    
+    end
+
+endgenerate
+
+deserializer des_inst (
+    
+    .clk(clk),
+    .rst_n(rst_n),
+    .Cin(Cin),
+    .Din(out_dscr),
+
+    .Dout(Dout),
+    .Done(Done)
  
 );
 
 
-pts_reg pts_reg_inst_2 (
-
-    .clk(clk),
-    .rst_n(),
-    .data(Dout_serdes),
-    .start(Done_serdes),
-    .out(out_serdes)
-
-);
-
-// manchester
-
-manchester_encoder me_inst (
-
-    .clk(clk),
-    .data_in(out_serdes),
-    .data_out(Dout)
-
-);
-
+//ecc_enc #(
+//  .K(4),
+//  .P0_LSB(1)
+//)
+// ecc_inst (
+//    .d_i  ( Din ),      //information bit vector input
+//    .q_o  ( enc_data ),      //encoded data word output
+//
+//    .p_o  (       ),      //parity vector output
+//    .p0_o (       ));     //extended parity bit
+//
 
 
 endmodule

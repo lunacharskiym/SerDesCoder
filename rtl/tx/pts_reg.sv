@@ -25,6 +25,7 @@ always_ff @(posedge clk) begin
 
         if (shift_cnt == 5'd31) begin
             done <= 'b1;
+            shifting = 'b0;
         end
     end
 end 

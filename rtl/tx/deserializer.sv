@@ -21,16 +21,14 @@ logic [1 : 0] cnt;
 logic sending;
 
 always_ff @(posedge clk) begin
-
+    Done <= 'b0;
     if (!rst_n) begin
         tmp <= 'b0;
         cnt <= 'b0;
         Done <= 'b0;
         sending <= 'b0;
 
-    end else begin 
-    if (cnt == 'b0) Done = 'b0;
-    if (Cin) begin 
+    end else if (Cin) begin 
         tmp[7 : 0] <= Din;
         cnt <= 'b0;
         sending <= 'b1;
@@ -42,12 +40,11 @@ always_ff @(posedge clk) begin
         tmp[7 : 0] <= Din;
         cnt <= cnt + 'b1;
 
-        if (cnt == 'b11) begin
-            Done = 'b1;
-            sending = 'b0;
-            end
+        if (cnt == 2'b11) begin
+            Done <= 'b1;
+            sending <= 'b0;
         end
-    end  
+    end
 end
 
 assign Dout = (sending) ? 'b0 : tmp;

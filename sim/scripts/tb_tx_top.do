@@ -10,6 +10,7 @@ vlog -sv +incdir+./ ../../rtl/tx/serializer.sv
 vlog -sv +incdir+./ ../../rtl/tx/deserializer.sv
 vlog -sv +incdir+./ ../../rtl/tx/serdes.sv 
 vlog -sv +incdir+./ ../../rtl/tx/manchester_encoder.sv
+vlog -sv +incdir+./ ../../rtl/tx/manchester_decoder.sv
 vlog -sv +incdir+./ ../../rtl/tx/tx_top.sv
 
 

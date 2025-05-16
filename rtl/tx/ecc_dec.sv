@@ -96,7 +96,7 @@
 //-----------------------------------------------------------------------------
 
 module ecc_dec #(
-  parameter K       = 8, //Information bit vector size
+  parameter K       = 4, //Information bit vector size
   parameter LATENCY = 0, //0: no latency (combinatorial design)
                          //1: registered outputs
                          //2: registered inputs+outputs

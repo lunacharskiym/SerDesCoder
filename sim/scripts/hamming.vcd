@@ -1,0 +1,352 @@
+$date
+	Sun May 11 14:45:28 2025
+$end
+$version
+	ModelSim Version 2020.4
+$end
+$timescale
+	1ns
+$end
+
+$scope module testbench_top_easy $end
+$var parameter 32 ! K $end
+$var parameter 32 " P0_LSB $end
+$var parameter 32 # DEC_LATENCY $end
+$var parameter 32 $ RUNS $end
+$var parameter 32 % m $end
+$var parameter 32 & n $end
+$var reg 1 ' clk $end
+$var reg 1 ( rst_n $end
+$var reg 4 ) enc_d [3:0] $end
+$var reg 4 * ch_enc_d [3:0] $end
+$var reg 4 + dec_q [3:0] $end
+$var reg 8 , enc_q [7:0] $end
+$var reg 8 - ch_q [7:0] $end
+$var reg 1 . dec_sb_err $end
+$var reg 1 / dec_db_err $end
+$var reg 1 0 dec_sb_fix $end
+$var integer 32 1 nflips $end
+$var integer 32 2 ch_nflips $end
+$var integer 32 3 flip1 $end
+$var integer 32 4 ch_flip1 $end
+$var integer 32 5 flip2 $end
+$var integer 32 6 ch_flip2 $end
+
+$scope function calculate_m $end
+$var integer 32 7 calculate_m $end
+$var integer 32 8 k $end
+$var integer 32 9 m $end
+$upscope $end
+
+$scope module dut_enc $end
+$var parameter 32 : K $end
+$var parameter 32 ; P0_LSB $end
+$var parameter 32 < m $end
+$var parameter 32 = n $end
+$var wire 1 > d_i [3] $end
+$var wire 1 ? d_i [2] $end
+$var wire 1 @ d_i [1] $end
+$var wire 1 A d_i [0] $end
+$var wire 1 B q_o [7] $end
+$var wire 1 C q_o [6] $end
+$var wire 1 D q_o [5] $end
+$var wire 1 E q_o [4] $end
+$var wire 1 F q_o [3] $end
+$var wire 1 G q_o [2] $end
+$var wire 1 H q_o [1] $end
+$var wire 1 I q_o [0] $end
+$var wire 1 J p_o [3] $end
+$var wire 1 K p_o [2] $end
+$var wire 1 L p_o [1] $end
+$var wire 1 M p0_o $end
+$var reg 7 N cw_w_dbits [7:1] $end
+$var reg 7 O cw [7:1] $end
+
+$scope function calculate_m $end
+$var integer 32 P calculate_m $end
+$var integer 32 Q k $end
+$var integer 32 R m $end
+$upscope $end
+
+$scope function store_dbits_in_codeword $end
+$var reg 7 S store_dbits_in_codeword [7:1] $end
+$var reg 4 T d [3:0] $end
+$var integer 32 U bit_idx $end
+$var integer 32 V cw_idx $end
+$upscope $end
+
+$scope function calculate_p $end
+$var reg 3 W calculate_p [3:1] $end
+$var reg 7 X cw [7:1] $end
+$var integer 32 Y p_idx $end
+$var integer 32 Z cw_idx $end
+$upscope $end
+
+$scope function store_p_in_codeword $end
+$var reg 7 [ store_p_in_codeword [7:1] $end
+$var reg 7 \ cw [7:1] $end
+$var reg 3 ] p [3:1] $end
+$var integer 32 ^ i $end
+$upscope $end
+$upscope $end
+
+$scope module dut_dec $end
+$var parameter 32 _ K $end
+$var parameter 32 ` LATENCY $end
+$var parameter 32 a P0_LSB $end
+$var parameter 32 b m $end
+$var parameter 32 c n $end
+$var wire 1 d rst_ni $end
+$var wire 1 e clk_i $end
+$var wire 1 f clkena_i $end
+$var wire 1 g d_i [7] $end
+$var wire 1 h d_i [6] $end
+$var wire 1 i d_i [5] $end
+$var wire 1 j d_i [4] $end
+$var wire 1 k d_i [3] $end
+$var wire 1 l d_i [2] $end
+$var wire 1 m d_i [1] $end
+$var wire 1 n d_i [0] $end
+$var reg 4 o q_o [3:0] $end
+$var reg 4 p syndrome_o [3:0] $end
+$var reg 1 q sb_err_o $end
+$var reg 1 r db_err_o $end
+$var reg 1 s sb_fix_o $end
+$var wire 1 t parity $end
+$var reg 1 u parity_reg $end
+$var wire 1 v syndrome [3] $end
+$var wire 1 w syndrome [2] $end
+$var wire 1 x syndrome [1] $end
+$var reg 3 y syndrome_reg [3:1] $end
+$var wire 1 z cw_fixed [7] $end
+$var wire 1 { cw_fixed [6] $end
+$var wire 1 | cw_fixed [5] $end
+$var wire 1 } cw_fixed [4] $end
+$var wire 1 ~ cw_fixed [3] $end
+$var wire 1 !! cw_fixed [2] $end
+$var wire 1 "! cw_fixed [1] $end
+$var wire 1 #! cw_fixed [0] $end
+$var wire 1 $! d [7] $end
+$var wire 1 %! d [6] $end
+$var wire 1 &! d [5] $end
+$var wire 1 '! d [4] $end
+$var wire 1 (! d [3] $end
+$var wire 1 )! d [2] $end
+$var wire 1 *! d [1] $end
+$var wire 1 +! d [0] $end
+$var reg 8 ,! d_reg [7:0] $end
+$var wire 1 -! q [3] $end
+$var wire 1 .! q [2] $end
+$var wire 1 /! q [1] $end
+$var wire 1 0! q [0] $end
+$var wire 1 1! sb_err $end
+$var wire 1 2! db_err $end
+$var wire 1 3! sb_fix $end
+
+$scope function calculate_m $end
+$var integer 32 4! calculate_m $end
+$var integer 32 5! k $end
+$var integer 32 6! m $end
+$upscope $end
+
+$scope function calculate_syndrome $end
+$var reg 3 7! calculate_syndrome [3:1] $end
+$var reg 8 8! cw [7:0] $end
+$var integer 32 9! p_idx $end
+$var integer 32 :! cw_idx $end
+$upscope $end
+
+$scope function correct_codeword $end
+$var reg 8 ;! correct_codeword [7:0] $end
+$var reg 8 <! cw [7:0] $end
+$var reg 3 =! syndrome [3:1] $end
+$upscope $end
+
+$scope function extract_q $end
+$var reg 4 >! extract_q [3:0] $end
+$var reg 8 ?! cw [7:0] $end
+$var integer 32 @! bit_idx $end
+$var integer 32 A! cw_idx $end
+$upscope $end
+
+$scope function is_power_of_2 $end
+$var reg 1 B! is_power_of_2 $end
+$var integer 32 C! arg $end
+$upscope $end
+
+$scope function information_error $end
+$var reg 1 D! information_error $end
+$var reg 3 E! syndrome [3:1] $end
+$upscope $end
+
+$scope begin gen_noregi $end
+$upscope $end
+
+$scope begin gen_norego $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0'
+0(
+b1010 )
+bx *
+b1010 +
+b11010010 ,
+bx -
+0.
+0/
+00
+b1010000 S
+b1010 T
+b10 W
+b1010000 X
+b1010010 [
+b1010000 \
+b10 ]
+b1010000 N
+b1010010 O
+b1010 o
+b0 p
+0q
+0r
+0s
+b0 7!
+b10100101 8!
+b10100100 ;!
+b10100101 <!
+b0 =!
+b1010 >!
+b10100100 ?!
+1B!
+0D!
+b0 E!
+0u
+b0 y
+b10100101 ,!
+b100 !
+b0 "
+b0 #
+b1 $
+b11 %
+b111 &
+b100 :
+b0 ;
+b11 <
+b111 =
+b100 _
+b0 `
+b0 a
+b11 b
+b111 c
+bx 7
+bx 8
+bx 9
+b0 1
+b0 2
+b0 3
+b0 4
+b0 5
+b0 6
+bx P
+bx Q
+bx R
+b100 U
+b1000 V
+b100 Y
+b1000 Z
+b100 ^
+bx 4!
+bx 5!
+bx 6!
+b100 9!
+b1000 :!
+b100 @!
+b1000 A!
+b0 C!
+0t
+0x
+0w
+0v
+0#!
+0"!
+1!!
+0~
+0}
+1|
+0{
+1z
+1+!
+0*!
+1)!
+0(!
+0'!
+1&!
+0%!
+1$!
+00!
+1/!
+0.!
+1-!
+01!
+02!
+03!
+0n
+1m
+0l
+0k
+1j
+0i
+1h
+1g
+1f
+0e
+0d
+0A
+1@
+0?
+1>
+0I
+1H
+0G
+0F
+1E
+0D
+1C
+1B
+0L
+1K
+0J
+1M
+$end
+#10
+1'
+1e
+b1010 *
+#20
+0'
+0e
+#30
+1'
+1e
+#40
+0'
+0e
+#50
+1'
+1e
+#60
+0'
+0e
+#70
+1'
+1e
+#80
+0'
+0e
+#90
+1'
+1e
+1(
